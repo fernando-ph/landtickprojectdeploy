@@ -24,7 +24,7 @@ func DatabaseInit() {
 	var DB_PORT = os.Getenv("DB_PORT")
 
 	// dsn := "postgresql://postgres:5u0u45M6Lo9MGy4EA01a@containers-us-west-38.railway.app:6110/railway"
-	dsn := fmt.Sprintf("postgresql://postgres:9xtC8me5FZHcUyu2gd9e@containers-us-west-207.railway.app:6702/railway", DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT)
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s", DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT)
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
