@@ -33,6 +33,6 @@ func main() {
 		PORT = "8080"
 	}
 
-	fmt.Println("Server is running on http://" + ":" + PORT)
+	fmt.Println("Server is runing" + PORT)
 	e.Logger.Fatal(e.Start(":" + PORT))
 }
