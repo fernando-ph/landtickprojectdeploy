@@ -13,13 +13,9 @@ import (
 )
 
 func main() {
-	e := echo.New()
+	godotenv.Load()
 
-	errEnv := godotenv.Load()
-	if errEnv != nil {
-		panic("Failed to load env file")
-	}
-	var PORT = os.Getenv("PORT")
+	e := echo.New()
 
 	mysql.DatabaseInit()
 	database.RunMigration()
@@ -30,8 +26,13 @@ func main() {
 		AllowHeaders: []string{"X-Requested-With", "Content-Type", "Authorization"},
 	}))
 
-	routes.RouteInit(e.Group("/api/v1"))
+	routes.Routeinit(e.Group("/api/v1"))
 
-	fmt.Println("server running:" + PORT)
+	var PORT = os.Getenv("PORT")
+	if PORT == "" {
+		PORT = "8080"
+	}
+
+	fmt.Println("Server is running on http://" + ":" + PORT)
 	e.Logger.Fatal(e.Start(":" + PORT))
 }
